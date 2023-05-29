@@ -20,4 +20,5 @@ data2 = [1, 2, 3, 0, -5, -7]
 # jugador_mayor_tiros_campo(data['jugadores'])
 # jugador_mayor_asistencias_totales(data['jugadores'])
 
-jugadores_mayores_puntos_dato_usr(data['jugadores'])
+jugador_mayor_temporadas_jugadas(data['jugadores'])
+

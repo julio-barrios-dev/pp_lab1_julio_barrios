@@ -331,42 +331,281 @@ def jugador_mayor_asistencias_totales(lista_jugadores: list[dict]):
 10_ Permitir al usuario ingresar un valor y mostrar los jugadores que han promediado más puntos por partido que ese valor.
 '''
 
-def jugadores_mayores_puntos_dato_usr(lista_jugadores: list[dict]):
+def jugadores_valores_mayores_segun_dato_usr(lista_jugadores: list[dict], estadistica: str):
     """
-    Esta función toma una lista de diccionarios que contienen información sobre jugadores de baloncesto y
-    solicita al usuario que ingrese un valor para los puntos. Luego devuelve un mensaje con los nombres y puntos de
-    jugadores que tienen un promedio de puntos por juego más alto que la entrada del usuario.
+    Esta función toma una lista de diccionarios que representan a los jugadores y una estadística, solicita al usuario
+    por un valor, y devuelve un mensaje con los nombres y valores de los jugadores cuya estadística es mayor
+    que la entrada del usuario.
     
-    :param lista_jugadores: Una lista de diccionarios que representan información sobre jugadores de baloncesto,
-    donde cada diccionario contiene el nombre del jugador y estadísticas como su promedio de puntos por
-    juego
+    :param lista_jugadores: Una lista de diccionarios que representan a los jugadores y sus estadísticas
     :tipo lista_jugadores: lista[dict]
-    :return: La función no tiene declaración de retorno, solo imprime un mensaje a la consola.
+    :param estadistica: El parámetro "estadistica" es una cadena que representa la estadística o
+    atributo de los jugadores que se utilizará para comparar sus valores y determinar cuáles tienen un
+    valor superior al introducido por el usuario. Ejemplos de posibles valores para "estadistica" podrían
+    ser "puntos", "
+    :type estadistica:str
+    :return: La función no tiene una declaración de devolución, por lo que devuelve Ninguno de forma predeterminada.
     """
-    
     if not len(lista_jugadores) > 0:
         print("La lista esta vacia")
         clear_console()
         return
     
     while True:
-        puntos_usr = input("Ingresa un valor de puntos: ")
-        if puntos_usr.isdigit():
-            puntos_usr = int(puntos_usr)
+        valor_usr = input("Ingresa un valor: ")
+        if valor_usr.isdigit():
+            valor_usr = int(valor_usr)
             break
 
-    jugadores_mayor_puntos = {}
+    jugadores_mayor_valores = {}
 
     for jugador in lista_jugadores:
         nombre = jugador['nombre']
-        puntos_jugador = jugador['estadisticas']['promedio_puntos_por_partido']
-        if puntos_jugador > puntos_usr:
-            jugadores_mayor_puntos[nombre] = puntos_jugador
+        valor_jugador = jugador['estadisticas'][estadistica]
+        if valor_jugador > valor_usr:
+            jugadores_mayor_valores[nombre] = valor_jugador
     mensaje = 'Jugadores con mayor puntaje segun el ingresado \n'
-    if jugadores_mayor_puntos:
-        for jugador, puntos in jugadores_mayor_puntos.items():
-            mensaje += f'{jugador}: {puntos} \n'
+    if jugadores_mayor_valores:
+        for jugador, valores in jugadores_mayor_valores.items():
+            mensaje += f'{jugador}: {valores} \n'
     else:
-        mensaje += "No hay jugadores con puntaje mayor al ingresado"
+        mensaje += "No hay jugadores con valores mayor al ingresado"
 
     print(mensaje)
+    clear_console()
+
+def jugadores_mayores_puntos_promedio_partido_dato_usr(lista_jugadores: list[dict]):
+    """
+    Esta función llama a otra función para encontrar los jugadores con los valores más altos para un determinado
+    estadística en una lista de diccionarios que representan a jugadores de baloncesto.
+    
+    :param lista_jugadores: Una lista de diccionarios que representan a los jugadores de baloncesto y sus estadísticas.
+    Cada diccionario contiene claves como "nombre" (nombre), "edad" (edad), "promedio_puntos_por_partido"
+    (promedio de puntos por partido), etc.
+    :tipo lista_jugadores: lista[dict]
+    """
+
+    jugadores_valores_mayores_segun_dato_usr(lista_jugadores, 'promedio_puntos_por_partido')
+
+'''
+11_ Permitir al usuario ingresar un valor y mostrar los jugadores que han promediado más rebotes por partido que ese valor.
+'''
+
+def jugadores_mayores_puntos_promedio_rebote_dato_usr(lista_jugadores: list[dict]):
+    """
+    Esta función llama a otra función para encontrar los jugadores con el promedio de rebotes más alto por
+    juego de una lista de jugadores proporcionada como un diccionario.
+    
+    :param lista_jugadores: Una lista de diccionarios que representan a los jugadores de baloncesto y sus estadísticas.
+    Cada diccionario contiene claves para "nombre" (nombre), "edad" (edad), "promedio_puntos_por_partido"
+    (media de puntos por partido), y "promedio_rebotes_por_partido" (media de rebotes por partido)
+    :tipo lista_jugadores: lista[dict]
+    """
+    
+
+    jugadores_valores_mayores_segun_dato_usr(lista_jugadores, 'promedio_rebotes_por_partido')
+
+'''
+12_ Permitir al usuario ingresar un valor y mostrar los jugadores que han promediado más asistencias por partido que ese valor.
+'''
+
+def jugadores_mayores_asistencia_promedio_dato_usr(lista_jugadores: list[dict]):
+    """
+    Esta función llama a otra función para encontrar los jugadores con los valores más altos para un determinado
+    estadística (en este caso, promedio de asistencias por partido) en una lista de diccionarios que representan el baloncesto
+    jugadores
+    
+    :param lista_jugadores: Una lista de diccionarios que representan a los jugadores y sus estadísticas. Cada
+    diccionario debe tener las siguientes claves: 'nombre' (cadena), 'edad' (entero), 'equipo' (cadena),
+    'promedio_puntos_por_partido' (float), 'promedio_rebotes_por_partido' (
+    :tipo lista_jugadores: lista[dict]
+    """
+
+    jugadores_valores_mayores_segun_dato_usr(lista_jugadores, 'promedio_asistencias_por_partido')
+
+'''
+13_ Calcular y mostrar el jugador con la mayor cantidad de robos totales.
+'''
+
+def jugador_mayor_robos_totales(lista_jugadores: list[dict]):
+    """
+    Esta función toma una lista de diccionarios que representan a jugadores de baloncesto y devuelve el jugador
+    con los robos totales más altos.
+    
+    :param lista_jugadores: Una lista de diccionarios que representan a los jugadores de baloncesto y sus estadísticas.
+    Cada diccionario contiene claves para el nombre del jugador, el equipo, los juegos jugados, los robos por juego y el total
+    roba
+    :tipo lista_jugadores: lista[dict]
+    """
+
+    jugador_maxima_estadistica(lista_jugadores, 'robos_totales')
+
+'''
+14_ Calcular y mostrar el jugador con la mayor cantidad de bloqueos totales.
+'''
+
+def jugador_mayor_bloqueos_totales(lista_jugadores: list[dict]):
+    """
+    Esta función toma una lista de diccionarios que representan jugadores y devuelve el jugador con el
+    estadística de bloques totales más alta.
+    
+    :param lista_jugadores: Una lista de diccionarios que representan a los jugadores de baloncesto y sus estadísticas.
+    Cada diccionario contiene claves para el nombre del jugador, el equipo, la posición y varias estadísticas como
+    puntos, rebotes y tapones
+    :tipo lista_jugadores: lista[dict]
+    """
+
+
+    jugador_maxima_estadistica(lista_jugadores, 'bloqueos_totales')
+
+'''
+15._  Permitir al usuario ingresar un valor y mostrar los jugadores que hayan tenido un porcentaje de tiros libres superior a ese valor.
+'''
+
+def jugador_mayor_tiros_libres_dato_usr(lista_jugadores: list[dict]):
+    """
+    Esta función toma una lista de diccionarios que contienen información sobre jugadores de baloncesto y
+    devuelve los jugadores con el mayor porcentaje de tiros libres según la entrada del usuario.
+    
+    :param lista_jugadores: Una lista de diccionarios donde cada diccionario representa un jugador y
+    contiene información sobre su desempeño en un juego de baloncesto, incluido su nombre, equipo y
+    estadísticas como puntos anotados, rebotes y porcentaje de tiros libres
+    :tipo lista_jugadores: lista[dict]
+    """
+
+    jugadores_valores_mayores_segun_dato_usr(lista_jugadores, 'porcentaje_tiros_libres')
+
+'''
+16_ Calcular y mostrar el promedio de puntos por partido del equipo excluyendo al jugador con la menor cantidad de puntos por partido.
+'''
+
+def promedio_puntos_partido_menos_mas_bajo(lista_jugadores: list[dict]):
+    """
+    Esta función calcula el promedio de puntos por juego para cada jugador en una lista de diccionarios y
+    devuelve los valores de todos los jugadores excepto el que tiene el promedio más bajo.
+    
+    :param lista_jugadores: Una lista de diccionarios que representan a los jugadores y sus estadísticas. Cada
+    diccionario debe tener una tecla "nombre" con el nombre del jugador y una tecla "estadisticas" con un
+    diccionario de estadísticas, incluyendo una tecla "promedio_puntos_por_partido" con la media del jugador
+    puntos por juego
+    :tipo lista_jugadores: lista[dict]
+    :return: No se especifica lo que se devuelve. La función sólo imprime un mensaje al
+    consola.
+    """
+      
+    if not len(lista_jugadores) > 0:
+        print("La lista esta vacia")
+        clear_console()
+        return
+    
+    min_valor = lista_jugadores[0]['estadisticas']['promedio_puntos_por_partido']
+    nombre_min = ''
+
+    for jugador in lista_jugadores:
+        valor_estadistica = jugador['estadisticas']['promedio_puntos_por_partido']
+        nombre = jugador['nombre']
+        if valor_estadistica < min_valor:
+            nombre_min = nombre
+            min_valor = valor_estadistica
+
+    mensaje = 'Promedio de puntos por partidos menos el mas bajo: \n'
+
+    for jugador in lista_jugadores:
+        if jugador["nombre"] == nombre_min:
+            continue
+        mensaje += f'{jugador["nombre"]}: {jugador["estadisticas"]["promedio_puntos_por_partido"]} \n'
+
+    print(mensaje)
+    clear_console()
+
+'''
+17_ Calcular y mostrar el jugador con la mayor cantidad de logros obtenidos
+'''
+def jugador_mayor_logros(lista_jugadores: list[dict]):
+    """
+    Esta función toma una lista de diccionarios que representan a los jugadores y sus logros, y devuelve
+    el nombre del jugador con más logros.
+    
+    :param lista_jugadores: El parámetro "lista_jugadores" es una lista de diccionarios, donde cada
+    diccionario representa a un jugador y contiene información sobre su nombre y logros
+    :tipo lista_jugadores: lista[dict]
+    :return: La función no está devolviendo nada, está imprimiendo el nombre del jugador con el
+    mayor número de logros y el número de logros que tienen.
+    """
+
+    if not len(lista_jugadores) > 0:
+        print("La lista esta vacia")
+        clear_console()
+        return
+    
+    nombre = ""
+    max_logros = 0
+
+    for jugador in lista_jugadores:
+        valor_logros = len(jugador['logros'])
+        if valor_logros > max_logros:
+            nombre = jugador['nombre']
+            max_logros = valor_logros
+    print(f'{nombre}: {max_logros}')
+
+'''
+18_ Permitir al usuario ingresar un valor y mostrar los jugadores que hayan tenido un porcentaje de tiros triples superior a ese valor.
+'''
+
+def porcentaje_tiros_triples_mayor_dato_usr(lista_jugadores: list[dict]):
+    """
+    Esta función llama a otra función para encontrar los jugadores con los valores más altos para el
+    Clave "porcentaje_tiros_triples" en una lista de diccionarios.
+    
+    :param lista_jugadores: Una lista de diccionarios donde cada diccionario representa un jugador y
+    contiene información sobre su desempeño en un partido de baloncesto. El diccionario debe tener la
+    siguientes claves: 'nombre' (string), 'puntos' (int), 'rebotes' (int), 'asistencias' (int), 'porcentaje
+    :tipo lista_jugadores: lista[dict]
+    """
+
+    jugadores_valores_mayores_segun_dato_usr(lista_jugadores, 'porcentaje_tiros_triples')
+
+'''
+ 19_ Calcular y mostrar el jugador con la mayor cantidad de temporadas jugadas
+'''
+
+def jugador_mayor_temporadas_jugadas(lista_jugadores: list[dict]):
+
+    jugador_maxima_estadistica(lista_jugadores, 'temporadas')
+
+
+'''
+20_ Permitir al usuario ingresar un valor y mostrar los jugadores , ordenados por posición en la cancha, que hayan tenido un porcentaje de tiros de campo superior a ese valor.
+
+'''
+
+def ddfsdfsdfdf(lista_jugadores: list[str]):
+
+    if not len(lista_jugadores) > 0:
+        print("La lista esta vacia")
+        clear_console()
+        return
+    
+    while True:
+        valor_usr = input("Ingresa un valor: ")
+        if valor_usr.isdigit():
+            valor_usr = int(valor_usr)
+            break
+
+    jugadores_mayor_valores = {}
+
+    for jugador in lista_jugadores:
+        nombre = jugador['nombre']
+        valor_jugador = jugador['estadisticas']['porcentaje_tiros_de_campo']
+        posicion_jugador = jugador['estadisticas']['posicion_jugador']
+        if valor_jugador > valor_usr:
+            jugadores_mayor_valores[nombre] = [valor_jugador, posicion_jugador]
+    mensaje = 'Jugadores con mayor puntaje segun el ingresado \n'
+    if jugadores_mayor_valores:
+        for jugador, valores in jugadores_mayor_valores.items():
+            mensaje += f'{jugador}: {valores} \n'
+    else:
+        mensaje += "No hay jugadores con valores mayor al ingresado"
+
+    print(mensaje)
+    clear_console()
