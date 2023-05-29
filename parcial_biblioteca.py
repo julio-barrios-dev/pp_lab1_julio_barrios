@@ -579,7 +579,7 @@ def jugador_mayor_temporadas_jugadas(lista_jugadores: list[dict]):
 
 '''
 
-def ddfsdfsdfdf(lista_jugadores: list[str]):
+def mostrar_jugadores_posicion(lista_jugadores: list[str]):
 
     if not len(lista_jugadores) > 0:
         print("La lista esta vacia")
@@ -609,3 +609,55 @@ def ddfsdfsdfdf(lista_jugadores: list[str]):
 
     print(mensaje)
     clear_console()
+
+def imprimir_menu() ->int:
+    mensaje = '''
+        Seleccione una opcion: 
+
+        1._ Mostrar la lista de todos los jugadores del Dream Team
+
+        2._ Seleccionar un jugador por su índice y mostrar sus estadísticas completas
+
+        3._ Buscar un jugador por su nombre y mostrar sus logros.
+
+        4._ Mostrar el promedio de puntos por partido de todo el equipo del Dream Team, ordenado por nombre de manera ascendente. 
+
+        5._ Ingresar el nombre de un jugador y mostrar si ese jugador es miembro del Salón de la Fama del Baloncesto.
+
+        6._ Mostrar el jugador con la mayor cantidad de rebotes totales.
+
+        7._ Mostrar el jugador con el mayor porcentaje de tiros de campo.
+
+        8._ Mostrar el jugador con la mayor cantidad de asistencias totales.
+
+        9._ Ingresar un valor y mostrar los jugadores que han promediado más puntos por partido que ese valor.
+
+        10._ Ingresar un valor y mostrar los jugadores que han promediado más rebotes por partido que ese valor.
+
+        11._ Ingresar un valor y mostrar los jugadores que han promediado más asistencias por partido que ese valor.
+
+        12._ Mostrar el jugador con la mayor cantidad de robos totales.
+
+        13._ Mostrar el jugador con la mayor cantidad de bloqueos totales.
+
+        14._ Ingresar un valor y mostrar los jugadores que hayan tenido un porcentaje de tiros libres superior a ese valor.
+
+        15._ Mostrar el promedio de puntos por partido del equipo excluyendo al jugador con la menor cantidad de puntos por partido.
+
+        16._ Mostrar el jugador con la mayor cantidad de logros obtenidos.
+
+        17._ Ingresar un valor y mostrar los jugadores que hayan tenido un porcentaje de tiros triples superior a ese valor.
+
+        18._ Mostrar el jugador con la mayor cantidad de temporadas jugadas
+
+        19._ Ingresar un valor y mostrar los jugadores , ordenados por posición en la cancha, que hayan tenido un porcentaje de tiros de campo superior a ese valor.
+    '''
+
+    print(mensaje)
+    while True:
+        dato = input('Ingrese un numero segun la lista: ')
+        if dato.isdigit():
+            dato = int(dato)
+            if dato < 20 and dato > 0:
+                return dato
+    
