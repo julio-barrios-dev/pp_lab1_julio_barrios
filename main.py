@@ -6,7 +6,11 @@ path_file = "C:/Users/JulioBC/Documents/Archivos Universidad/1_cuatrimestre/labo
 with open(path_file, "r") as file:
     data = json.load(file)
 
-data2 = [1, 2, 3]
+data2 = [1, 2, 3, 0, -5, -7]
 # mostrar_nombre_jugadores(data['jugadores'])
 
-mostrar_estadisticas_jugador(data['jugadores'])
+# mostrar_estadisticas_jugador(data['jugadores'])
+
+# buscar_jugador(data['jugadores'])
+
+promedio_puntos_partido(data['jugadores'])
