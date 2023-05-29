@@ -250,7 +250,7 @@ def jugador_miembro_salon_baloncesto(lista_jugadores: list[dict]):
 7_ Calcular y mostrar el jugador con la mayor cantidad de rebotes totales.
 '''
 
-def jugador_mas_rebotes(lista_jugadores: list[dict]):
+def jugador_maxima_estadistica(lista_jugadores: list[dict], estadistica: str):
 
     if not len(lista_jugadores) > 0:
         print("La lista esta vacia")
@@ -258,12 +258,16 @@ def jugador_mas_rebotes(lista_jugadores: list[dict]):
         return
     
     nombre = ""
-    mas_rebotes = 0
+    max_estadistica = 0
 
     for jugador in lista_jugadores:
-        rebotes = jugador['estadisticas']['rebotes_totales']
-        if rebotes > mas_rebotes:
+        valor_estadistica = jugador['estadisticas'][estadistica]
+        if valor_estadistica > max_estadistica:
             nombre = jugador['nombre']
-            mas_rebotes = rebotes
-    print(f'{nombre} -> Cantidad de rebotes totales: {mas_rebotes}')
+            max_estadistica = valor_estadistica
+    print(f'{nombre}: {max_estadistica}')
+
+def jugador_mas_rebotes(lista_jugadores: list[dict]):
+    
+    jugador_maxima_estadistica(lista_jugadores, 'rebotes_totales')
 
