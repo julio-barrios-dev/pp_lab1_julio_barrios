@@ -16,4 +16,6 @@ data2 = [1, 2, 3, 0, -5, -7]
 # promedio_puntos_partido(data['jugadores'])
 
 # jugador_miembro_salon_baloncesto(data['jugadores'])
-jugador_mas_rebotes(data['jugadores'])
+# jugador_mas_rebotes(data['jugadores'])
+# jugador_mayor_tiros_campo(data['jugadores'])
+# jugador_mayor_asistencias_totales(data['jugadores'])

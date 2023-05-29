@@ -251,6 +251,19 @@ def jugador_miembro_salon_baloncesto(lista_jugadores: list[dict]):
 '''
 
 def jugador_maxima_estadistica(lista_jugadores: list[dict], estadistica: str):
+    """
+    Esta función toma una lista de diccionarios que representan jugadores y una estadística, y devuelve el
+    nombre y valor del jugador con el valor más alto para esa estadística.
+    
+    :param lista_jugadores: Una lista de diccionarios que representan a los jugadores y sus estadísticas
+    :tipo lista_jugadores: lista[dict]
+    :param estadistica: "estadistica" es un parámetro de cadena que representa la estadística específica que
+    queremos encontrar el valor máximo para en la lista de jugadores. Se utiliza para acceder al valor de ese
+    estadística para cada jugador en el bucle
+    :type estadistica:str
+    :return: La función no tiene declaración de retorno, solo imprime el nombre del jugador con
+    el valor más alto para la estadística especificada.
+    """
 
     if not len(lista_jugadores) > 0:
         print("La lista esta vacia")
@@ -267,7 +280,50 @@ def jugador_maxima_estadistica(lista_jugadores: list[dict], estadistica: str):
             max_estadistica = valor_estadistica
     print(f'{nombre}: {max_estadistica}')
 
+
 def jugador_mas_rebotes(lista_jugadores: list[dict]):
+    """
+    Esta función llama a otra función para encontrar al jugador con el total de rebotes más alto de una lista
+    de jugadores
     
+    :param lista_jugadores: Una lista de diccionarios donde cada diccionario representa un jugador y
+    contiene información sobre sus estadísticas
+    :tipo lista_jugadores: lista[dict]
+    """
+
     jugador_maxima_estadistica(lista_jugadores, 'rebotes_totales')
+
+'''
+8_ Calcular y mostrar el jugador con el mayor porcentaje de tiros de campo.
+'''
+
+def jugador_mayor_tiros_campo(lista_jugadores: list[dict]):
+    """
+    Esta función llama a otra función para encontrar al jugador con el mayor porcentaje de tiros de campo en un
+    lista de jugadores.
+    
+    :param lista_jugadores: Una lista de diccionarios que representan a los jugadores de baloncesto y sus estadísticas.
+    Cada diccionario contiene claves para el nombre del jugador, el equipo, la posición y varias estadísticas como
+    puntos por partido, rebotes por partido y porcentaje de tiros de campo
+    :tipo lista_jugadores: lista[dict]
+    """
+
+    jugador_maxima_estadistica(lista_jugadores, 'porcentaje_tiros_de_campo')
+
+    '''
+    9_ Calcular y mostrar el jugador con la mayor cantidad de asistencias totales.
+    '''
+
+def jugador_mayor_asistencias_totales(lista_jugadores: list[dict]):
+    """
+    Esta función toma una lista de diccionarios que representan a jugadores de baloncesto y devuelve el jugador
+    con el mayor número total de asistencias.
+    
+    :param lista_jugadores: Una lista de diccionarios que representan a los jugadores de baloncesto y sus estadísticas.
+    Cada diccionario contiene claves para el nombre del jugador, el equipo y varias estadísticas como puntos,
+    rebotes y asistencias
+    :tipo lista_jugadores: lista[dict]
+    """
+
+    jugador_maxima_estadistica(lista_jugadores, 'asistencias_totales')
 
