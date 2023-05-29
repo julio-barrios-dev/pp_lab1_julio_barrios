@@ -143,7 +143,7 @@ def guardadr_estadisticas_jugador(nombre: str, claves: list[str], valores:list[s
 4_ Permitir al usuario buscar un jugador por su nombre y mostrar sus logros, como campeonatos de la NBA, participaciones en el All-Star y pertenencia al Salón de la Fama del Baloncesto, etc.
 '''
 
-def buscar_jugador(lista_jugadores: list[dict]):
+def buscar_jugador_logros(lista_jugadores: list[dict]):
     """
     Esta función busca el nombre de un jugador en una lista de diccionarios e imprime sus logros
     si se encuentra.
@@ -206,3 +206,64 @@ def promedio_puntos_partido(lista:list[str]) ->None:
         mensaje += f"{jugador}: {datos[jugador]} \n"
     print(mensaje)
     clear_console()
+
+'''
+6_ Permitir al usuario ingresar el nombre de un jugador y mostrar si ese jugador es miembro del Salón de la Fama del Baloncesto.
+'''
+
+def jugador_miembro_salon_baloncesto(lista_jugadores: list[dict]):
+    """
+    Esta función comprueba si un jugador de baloncesto determinado es miembro del Salón de la Fama y devuelve un
+    mensaje indicando si lo son o no.
+    
+    :param lista_jugadores: Una lista de diccionarios que representan a jugadores de baloncesto, donde cada
+    el diccionario contiene información sobre un jugador, como su nombre y logros
+    :tipo lista_jugadores: lista[dict]
+    :return: La función no tiene una declaración de retorno, por lo que devolverá Ninguno de forma predeterminada.
+    """
+    nombre = input("Ingrese el nombre del jugador: ").lower()
+
+    resultados = 0
+
+    if not len(lista_jugadores) > 0:
+        print("La lista esta vacia")
+        clear_console()
+        return
+    
+    for jugador in lista_jugadores:
+        if nombre == jugador['nombre'].lower():
+            if jugador['logros'][-1] == "Miembro del Salon de la Fama del Baloncesto":
+
+                resultados = 1
+                print(f"{jugador['nombre']} es miembro del salon de la fama")
+                break
+
+            else:
+                resultados = 1
+                print(f"{jugador['nombre']} no es miembro del salon de la fama")
+                break
+    if resultados == 0:
+        print("No se encontraron resultados")
+    clear_console()
+
+'''
+7_ Calcular y mostrar el jugador con la mayor cantidad de rebotes totales.
+'''
+
+def jugador_mas_rebotes(lista_jugadores: list[dict]):
+
+    if not len(lista_jugadores) > 0:
+        print("La lista esta vacia")
+        clear_console()
+        return
+    
+    nombre = ""
+    mas_rebotes = 0
+
+    for jugador in lista_jugadores:
+        rebotes = jugador['estadisticas']['rebotes_totales']
+        if rebotes > mas_rebotes:
+            nombre = jugador['nombre']
+            mas_rebotes = rebotes
+    print(f'{nombre} -> Cantidad de rebotes totales: {mas_rebotes}')
+

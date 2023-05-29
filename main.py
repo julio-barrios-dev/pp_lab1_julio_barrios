@@ -13,4 +13,7 @@ data2 = [1, 2, 3, 0, -5, -7]
 
 # buscar_jugador(data['jugadores'])
 
-promedio_puntos_partido(data['jugadores'])
+# promedio_puntos_partido(data['jugadores'])
+
+# jugador_miembro_salon_baloncesto(data['jugadores'])
+jugador_mas_rebotes(data['jugadores'])
