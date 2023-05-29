@@ -310,9 +310,9 @@ def jugador_mayor_tiros_campo(lista_jugadores: list[dict]):
 
     jugador_maxima_estadistica(lista_jugadores, 'porcentaje_tiros_de_campo')
 
-    '''
-    9_ Calcular y mostrar el jugador con la mayor cantidad de asistencias totales.
-    '''
+'''
+9_ Calcular y mostrar el jugador con la mayor cantidad de asistencias totales.
+'''
 
 def jugador_mayor_asistencias_totales(lista_jugadores: list[dict]):
     """
@@ -327,3 +327,46 @@ def jugador_mayor_asistencias_totales(lista_jugadores: list[dict]):
 
     jugador_maxima_estadistica(lista_jugadores, 'asistencias_totales')
 
+'''
+10_ Permitir al usuario ingresar un valor y mostrar los jugadores que han promediado más puntos por partido que ese valor.
+'''
+
+def jugadores_mayores_puntos_dato_usr(lista_jugadores: list[dict]):
+    """
+    Esta función toma una lista de diccionarios que contienen información sobre jugadores de baloncesto y
+    solicita al usuario que ingrese un valor para los puntos. Luego devuelve un mensaje con los nombres y puntos de
+    jugadores que tienen un promedio de puntos por juego más alto que la entrada del usuario.
+    
+    :param lista_jugadores: Una lista de diccionarios que representan información sobre jugadores de baloncesto,
+    donde cada diccionario contiene el nombre del jugador y estadísticas como su promedio de puntos por
+    juego
+    :tipo lista_jugadores: lista[dict]
+    :return: La función no tiene declaración de retorno, solo imprime un mensaje a la consola.
+    """
+    
+    if not len(lista_jugadores) > 0:
+        print("La lista esta vacia")
+        clear_console()
+        return
+    
+    while True:
+        puntos_usr = input("Ingresa un valor de puntos: ")
+        if puntos_usr.isdigit():
+            puntos_usr = int(puntos_usr)
+            break
+
+    jugadores_mayor_puntos = {}
+
+    for jugador in lista_jugadores:
+        nombre = jugador['nombre']
+        puntos_jugador = jugador['estadisticas']['promedio_puntos_por_partido']
+        if puntos_jugador > puntos_usr:
+            jugadores_mayor_puntos[nombre] = puntos_jugador
+    mensaje = 'Jugadores con mayor puntaje segun el ingresado \n'
+    if jugadores_mayor_puntos:
+        for jugador, puntos in jugadores_mayor_puntos.items():
+            mensaje += f'{jugador}: {puntos} \n'
+    else:
+        mensaje += "No hay jugadores con puntaje mayor al ingresado"
+
+    print(mensaje)
