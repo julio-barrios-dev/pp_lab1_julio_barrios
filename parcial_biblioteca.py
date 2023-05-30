@@ -579,7 +579,7 @@ def jugador_mayor_temporadas_jugadas(lista_jugadores: list[dict]):
 
 '''
 
-def mostrar_jugadores_posicion(lista_jugadores: list[str]):
+def mostrar_jugadores_posicion(lista_jugadores: list[dict]):
 
     if not len(lista_jugadores) > 0:
         print("La lista esta vacia")
@@ -609,6 +609,40 @@ def mostrar_jugadores_posicion(lista_jugadores: list[str]):
 
     print(mensaje)
     clear_console()
+
+'''
+--------Parcial--------
+'''
+'''
+1. Determinar la cantidad de jugadores que hay por cada posición.
+Ejemplo:
+Base: 2
+Alero: 3
+...
+'''
+
+def cantidad_jugadores_posicion(lista_jugadores: list[dict]):
+    posiciones = {}
+
+    for jugador in lista_jugadores:
+        if not jugador['posicion'] in posiciones:
+            posiciones[jugador['posicion']] = 1
+        else:
+            posiciones[jugador['posicion']] += 1
+
+    mensaje = "Cantidad de jugadores por pocision \n"
+
+    for posicion,cantidad in posiciones.items():
+        mensaje += f"{posicion}: {cantidad} \n"
+    print(mensaje)
+
+'''
+Mostrar la lista de jugadores ordenadas por la cantidad de All-Star de forma descendente. 
+La salida por pantalla debe tener un formato similar a este:
+Michael Jordan (14 veces All Star)
+Magic Johnson (12 veces All-Star)
+...
+'''
 
 def imprimir_menu() ->int:
     mensaje = '''
@@ -651,6 +685,8 @@ def imprimir_menu() ->int:
         18._ Mostrar el jugador con la mayor cantidad de temporadas jugadas
 
         19._ Ingresar un valor y mostrar los jugadores , ordenados por posición en la cancha, que hayan tenido un porcentaje de tiros de campo superior a ese valor.
+
+        20._ Mostrar cantidad de jugadores que hay por posicion.
     '''
 
     print(mensaje)
@@ -658,6 +694,52 @@ def imprimir_menu() ->int:
         dato = input('Ingrese un numero segun la lista: ')
         if dato.isdigit():
             dato = int(dato)
-            if dato < 20 and dato > 0:
+            if dato < 21 and dato > 0:
                 return dato
+def funcion_principal(jugadores: list[dict]):
     
+    opcion =  imprimir_menu()
+
+    match opcion:
+        case 1: 
+            mostrar_nombre_jugadores(jugadores)
+        case 2: 
+            mostrar_estadisticas_jugador(jugadores)
+        case 3: 
+            buscar_jugador_logros(jugadores)
+        case 4: 
+            promedio_puntos_partido(jugadores)
+        case 5: 
+            jugador_miembro_salon_baloncesto(jugadores)
+        case 6: 
+            jugador_mas_rebotes(jugadores)
+        case 7: 
+            jugador_mayor_tiros_campo(jugadores)
+        case 8: 
+            jugador_mayor_asistencias_totales(jugadores)
+        case 9: 
+            jugadores_mayores_puntos_promedio_partido_dato_usr(jugadores)
+        case 10: 
+            jugadores_mayores_puntos_promedio_rebote_dato_usr(jugadores)
+        case 11: 
+            jugadores_mayores_asistencia_promedio_dato_usr(jugadores)
+        case 12: 
+            jugador_mayor_robos_totales(jugadores)
+        case 13: 
+            jugador_mayor_bloqueos_totales(jugadores)
+        case 14: 
+            jugador_mayor_tiros_libres_dato_usr(jugadores)
+        case 15: 
+            promedio_puntos_partido_menos_mas_bajo(jugadores)
+        case 16: 
+            jugador_mayor_logros(jugadores)
+        case 17: 
+            porcentaje_tiros_triples_mayor_dato_usr(jugadores)
+        case 18: 
+            jugador_mayor_temporadas_jugadas(jugadores)
+        case 19: 
+            print("No termine este punto ;C")
+        case 20: 
+            cantidad_jugadores_posicion(jugadores)
+
+    clear_console()
