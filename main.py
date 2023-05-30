@@ -9,5 +9,4 @@ with open(path_file, "r") as file:
 jugadores = data['jugadores']
 
 
-
 funcion_principal(jugadores)

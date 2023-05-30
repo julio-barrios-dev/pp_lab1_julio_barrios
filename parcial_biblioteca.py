@@ -622,6 +622,15 @@ Alero: 3
 '''
 
 def cantidad_jugadores_posicion(lista_jugadores: list[dict]):
+    """
+    Esta función toma una lista de diccionarios que representan a los jugadores y devuelve el recuento de jugadores para
+    cada puesto
+    
+    :param lista_jugadores: Una lista de diccionarios que representan información sobre jugadores en un deporte
+    equipo. Cada diccionario contiene claves de 'posición' y potencialmente otras claves con información sobre el
+    jugador
+    :tipo lista_jugadores: lista[dict]
+    """
     posiciones = {}
 
     for jugador in lista_jugadores:
@@ -637,12 +646,41 @@ def cantidad_jugadores_posicion(lista_jugadores: list[dict]):
     print(mensaje)
 
 '''
-Mostrar la lista de jugadores ordenadas por la cantidad de All-Star de forma descendente. 
+2. Mostrar la lista de jugadores ordenadas por la cantidad de All-Star de forma descendente. 
 La salida por pantalla debe tener un formato similar a este:
 Michael Jordan (14 veces All Star)
 Magic Johnson (12 veces All-Star)
 ...
 '''
+def jugadores_cantidad_all_star(lista_jugadores: list[dict]):
+    jugadores_all_start = {}
+    for jugador in lista_jugadores:
+        jugadores_all_start[jugador['nombre']] = 0
+        for logro in jugador['logros']:
+            if re.search(r'All-Star$', logro):
+                split_all_start = logro.split(' ')
+                cantidad_all_start = split_all_start[0]
+                jugadores_all_start[jugador['nombre']] = cantidad_all_start
+
+    lista_all_start_jugadores = list(jugadores_all_start.items())
+    rango_jugadores = len(lista_all_start_jugadores)
+    flag_swap = True
+    while(flag_swap):
+        flag_swap = False
+        rango_jugadores = rango_jugadores - 1
+        for jugador in range(rango_jugadores):
+            if int (lista_all_start_jugadores[jugador][1]) < int (lista_all_start_jugadores[jugador + 1][1]):
+                lista_all_start_jugadores[jugador] = lista_all_start_jugadores[jugador + 1]
+                lista_all_start_jugadores[jugador + 1] = lista_all_start_jugadores[jugador]
+                flag_swap = True
+    
+    mensaje = "Cantidad de jugadores con mas a menor All Start \n"
+    for jugador,cantidad in lista_all_start_jugadores:
+        mensaje += f"{jugador}: {cantidad} veces All Star\n"
+    print(mensaje)
+    
+
+
 
 def imprimir_menu() ->int:
     mensaje = '''
@@ -687,6 +725,8 @@ def imprimir_menu() ->int:
         19._ Ingresar un valor y mostrar los jugadores , ordenados por posición en la cancha, que hayan tenido un porcentaje de tiros de campo superior a ese valor.
 
         20._ Mostrar cantidad de jugadores que hay por posicion.
+
+        21._ Mostrar cantidad de jugadores que hay por posicion.
     '''
 
     print(mensaje)
@@ -694,7 +734,7 @@ def imprimir_menu() ->int:
         dato = input('Ingrese un numero segun la lista: ')
         if dato.isdigit():
             dato = int(dato)
-            if dato < 21 and dato > 0:
+            if dato < 22 and dato > 0:
                 return dato
 def funcion_principal(jugadores: list[dict]):
     
@@ -741,5 +781,7 @@ def funcion_principal(jugadores: list[dict]):
             print("No termine este punto ;C")
         case 20: 
             cantidad_jugadores_posicion(jugadores)
+        case 21: 
+            jugadores_cantidad_all_star(jugadores)
 
     clear_console()
