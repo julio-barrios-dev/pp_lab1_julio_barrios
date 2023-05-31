@@ -653,6 +653,15 @@ Magic Johnson (12 veces All-Star)
 ...
 '''
 def jugadores_cantidad_all_star(lista_jugadores: list[dict]):
+    """
+    Esta función toma una lista de diccionarios que contienen información sobre los jugadores de baloncesto y sus
+    logros y devuelve un mensaje que muestra el número de veces que cada jugador ha sido All-Star,
+    ordenados de mayor a menor.
+    
+    :param lista_jugadores: El parámetro "lista_jugadores" es una lista de diccionarios, donde cada
+    diccionario representa a un jugador y contiene información sobre su nombre y logros
+    :tipo lista_jugadores: lista[dict]
+    """
     jugadores_all_start = {}
     for jugador in lista_jugadores:
         jugadores_all_start[jugador['nombre']] = 0
@@ -679,6 +688,49 @@ def jugadores_cantidad_all_star(lista_jugadores: list[dict]):
         mensaje += f"{jugador}: {cantidad} veces All Star\n"
     print(mensaje)
     
+'''
+Determinar qué jugador tiene las mejores estadísticas en cada valor. La salida por pantalla debe tener un formato similar a este:
+Mayor cantidad de temporadas: Karl Malone (19)
+Mayor cantidad de puntos totales: Karl Malon (36928)
+'''
+
+def jugadores_mejores_estadisticas(lista_jugadores: list[dict]):
+    """
+    Esta función toma una lista de diccionarios que contienen estadísticas de jugadores y devuelve el jugador con
+    el valor más alto para cada categoría estadística.
+    
+    :param lista_jugadores: Una lista de diccionarios, donde cada diccionario representa un jugador y
+    contiene su nombre y estadísticas
+    :tipo lista_jugadores: lista[dict]
+    """
+    mejores_estadisticas_jugadores = {
+        'temporadas': ['nombre', 0],
+        'puntos_totales': ['nombre', 0],
+        'promedio_puntos_por_partido': ['nombre', 0],
+        'rebotes_totales': ['nombre', 0],
+        'promedio_rebotes_por_partido': ['nombre', 0],
+        'asistencias_totales': ['nombre', 0],
+        'promedio_asistencias_por_partido': ['nombre', 0],
+        'robos_totales': ['nombre', 0],
+        'bloqueos_totales': ['nombre', 0],
+        'porcentaje_tiros_de_campo': ['nombre', 0],
+        'porcentaje_tiros_libres': ['nombre', 0],
+        'porcentaje_tiros_triples': ['nombre', 0],
+    }
+
+    
+    for estadistica in mejores_estadisticas_jugadores.keys():
+        for jugador in lista_jugadores:
+            estadisticas_jugador = jugador['estadisticas']
+            if (estadisticas_jugador[estadistica]) > (mejores_estadisticas_jugadores[estadistica][1]):
+               max_estadistica = estadisticas_jugador[estadistica]
+               mejores_estadisticas_jugadores[estadistica] = [jugador['nombre'], max_estadistica]
+
+    mensaje = "Jugadores con mejores estadisticas de cada valor: \n"
+
+    for estadistica,dato in mejores_estadisticas_jugadores.items():
+        mensaje += f"Mayor cantidad de {estadistica}: {dato[0]} {dato[1]} \n"
+    print(mensaje)
 
 
 
@@ -727,6 +779,8 @@ def imprimir_menu() ->int:
         20._ Mostrar cantidad de jugadores que hay por posicion.
 
         21._ Mostrar cantidad de jugadores que hay por posicion.
+
+        22._ Mostrar jugadores con mejores estadisticas de cada valor.
     '''
 
     print(mensaje)
@@ -734,7 +788,7 @@ def imprimir_menu() ->int:
         dato = input('Ingrese un numero segun la lista: ')
         if dato.isdigit():
             dato = int(dato)
-            if dato < 22 and dato > 0:
+            if dato < 23 and dato > 0:
                 return dato
 def funcion_principal(jugadores: list[dict]):
     
@@ -783,5 +837,7 @@ def funcion_principal(jugadores: list[dict]):
             cantidad_jugadores_posicion(jugadores)
         case 21: 
             jugadores_cantidad_all_star(jugadores)
+        case 22: 
+            jugadores_mejores_estadisticas(jugadores)
 
     clear_console()
