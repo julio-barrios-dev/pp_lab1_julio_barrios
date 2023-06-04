@@ -576,7 +576,6 @@ def jugador_mayor_temporadas_jugadas(lista_jugadores: list[dict]):
 
 '''
 20_ Permitir al usuario ingresar un valor y mostrar los jugadores , ordenados por posición en la cancha, que hayan tenido un porcentaje de tiros de campo superior a ese valor.
-
 '''
 
 def mostrar_jugadores_posicion(lista_jugadores: list[dict]):
@@ -592,22 +591,39 @@ def mostrar_jugadores_posicion(lista_jugadores: list[dict]):
             valor_usr = int(valor_usr)
             break
 
-    jugadores_mayor_valores = {}
+    jugadores_posiciones = []
 
     for jugador in lista_jugadores:
-        nombre = jugador['nombre']
-        valor_jugador = jugador['estadisticas']['porcentaje_tiros_de_campo']
-        posicion_jugador = jugador['estadisticas']['posicion_jugador']
-        if valor_jugador > valor_usr:
-            jugadores_mayor_valores[nombre] = [valor_jugador, posicion_jugador]
-    mensaje = 'Jugadores con mayor puntaje segun el ingresado \n'
-    if jugadores_mayor_valores:
-        for jugador, valores in jugadores_mayor_valores.items():
-            mensaje += f'{jugador}: {valores} \n'
-    else:
-        mensaje += "No hay jugadores con valores mayor al ingresado"
+        jugadores_posiciones.append((jugador['nombre'], jugador['posicion'], jugador['estadisticas']['porcentaje_tiros_de_campo']))
+    
+    rango_jugadores = len(jugadores_posiciones)
 
-    print(mensaje)
+    flag_swap = True
+    while(flag_swap):
+        flag_swap = False
+        rango_jugadores = rango_jugadores - 1
+        for jugador in range(rango_jugadores):
+
+            if (jugadores_posiciones[jugador][1]) > (jugadores_posiciones[jugador + 1][1]):
+                aux = jugadores_posiciones[jugador]
+                jugadores_posiciones[jugador] = jugadores_posiciones[jugador + 1]
+                jugadores_posiciones[jugador + 1] = aux
+                flag_swap = True
+
+    mensaje = f"Jugadores con porcentaje de tiros de campo superior al ingresado: \n"
+
+    hay_jugadores = False
+
+    for jugador in jugadores_posiciones:
+        if jugador[2] > valor_usr:
+            hay_jugadores = True
+            mensaje += f"{jugador[0]}-{jugador[1]} -> {jugador[2]} \n"
+
+    if hay_jugadores:
+        print(mensaje)
+    else:
+        print("No hay jugadores con datos mayor al ingresado")
+
     clear_console()
 
 '''
@@ -679,9 +695,9 @@ def jugadores_cantidad_all_star(lista_jugadores: list[dict]):
         rango_jugadores = rango_jugadores - 1
         for jugador in range(rango_jugadores):
             if int (lista_all_start_jugadores[jugador][1]) < int (lista_all_start_jugadores[jugador + 1][1]):
+                aux = lista_all_start_jugadores[jugador]
                 lista_all_start_jugadores[jugador] = lista_all_start_jugadores[jugador + 1]
-                lista_all_start_jugadores[jugador + 1] = lista_all_start_jugadores[jugador]
-                flag_swap = True
+                lista_all_start_jugadores[jugador + 1] = aux
     
     mensaje = "Cantidad de jugadores con mas a menor All Start \n"
     for jugador,cantidad in lista_all_start_jugadores:
@@ -689,7 +705,7 @@ def jugadores_cantidad_all_star(lista_jugadores: list[dict]):
     print(mensaje)
     
 '''
-Determinar qué jugador tiene las mejores estadísticas en cada valor. La salida por pantalla debe tener un formato similar a este:
+3_ Determinar qué jugador tiene las mejores estadísticas en cada valor. La salida por pantalla debe tener un formato similar a este:
 Mayor cantidad de temporadas: Karl Malone (19)
 Mayor cantidad de puntos totales: Karl Malon (36928)
 '''
@@ -832,7 +848,7 @@ def funcion_principal(jugadores: list[dict]):
         case 18: 
             jugador_mayor_temporadas_jugadas(jugadores)
         case 19: 
-            print("No termine este punto ;C")
+            mostrar_jugadores_posicion(jugadores)
         case 20: 
             cantidad_jugadores_posicion(jugadores)
         case 21: 
