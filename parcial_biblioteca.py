@@ -622,7 +622,7 @@ def mostrar_jugadores_posicion(lista_jugadores: list[dict]):
     if hay_jugadores:
         print(mensaje)
     else:
-        print("No hay jugadores con datos mayor al ingresado")
+        print("No hay jugadores con datos mayor al ingresado.")
 
     clear_console()
 
@@ -794,7 +794,7 @@ def imprimir_menu() ->int:
 
         20._ Mostrar cantidad de jugadores que hay por posicion.
 
-        21._ Mostrar cantidad de jugadores que hay por posicion.
+        21._ Mostrar la lista de jugadores ordenadas por la cantidad de All-Star de forma descendente.
 
         22._ Mostrar jugadores con mejores estadisticas de cada valor.
     '''
